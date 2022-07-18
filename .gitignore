@@ -3,3 +3,4 @@ results*/
 resuts_dir/*
 tmp_*
 __pycache__/
+.python-version
