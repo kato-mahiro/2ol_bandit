@@ -4,7 +4,12 @@ LABEL discription="実験実行用の環境"
 
 RUN apt update
 RUN apt install -y graphviz
-
 RUN pip3 install graphviz
 RUN pip3 install matplotlib
 RUN pip3 install gym
+
+COPY ./modneat-python /modneat-python
+WORKDIR /modneat-python
+RUN pip install .
+
+WORKDIR /
