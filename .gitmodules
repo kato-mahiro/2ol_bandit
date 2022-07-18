@@ -1,0 +1,3 @@
+[submodule "modneat-python"]
+	path = modneat-python
+	url = https://github.com/kato-mahiro/modneat-python
