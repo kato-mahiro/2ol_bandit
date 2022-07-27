@@ -4,16 +4,23 @@ import gym
 import random
 
 """
-常に観測値として1を返す環境
-環境に対して取るべき行動が周期的に切り替わり、
-それに応じて報酬が決定される。
+それぞれ異なる平均・分散に従って報酬を返すN本腕バンディットタスク
 """
-
-class StaticCyclicEnv0(gym.Env):
-    def __init__(self, cycle, cycle_cnt_max, action_num, noise):
+class BanditEnv(gym.Env):
+    def __init__(
+                    self,
+                    sd_fluctuate_timing,
+                    mean_flucturate_timing,
+                    generation_number, #今回のタスクが何世代目の試行か
+                    arm_number
+                ):
         super().__init__()
-        self.cycle = cycle
-        assert self.cycle % action_num == 0 and self.cycle >= action_num, 'cycleはアクション数の整数倍でなくてはならない'
+        self.sd_flucturate_timing = sd_fluctuate_timing
+        self.mean_flucturate_timing = mean_flucturate_timing
+        self.generation_number = generation_number
+
+        self.mean_list = [0.0, 0.5, 1.0, 1.5]
+        self.sd_list = [0.1, -0.5, 1.0, 1.5]
 
         self.action_num = action_num
         self.desired_action = -1
